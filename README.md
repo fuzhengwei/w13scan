@@ -8,6 +8,30 @@
 
 html模板源码:[w13scan-report](https://github.com/boy-hack/w13scan-report)
 
+## 部署
+
+```java
+# docker-compose -f docker-compose.yml up -d
+# docker run -d \
+#  --name w13scan \
+#  -p 7778:7778 \
+#  -v ./output:/w13scan/W13SCAN/output \
+#  fuzhengwei/w13scan:1.0 \
+#  python3 w13scan.py -s 127.0.0.1:7778 --html
+# 如果想让w13scan被动模式支持https，先启动docker w13scan,然后在浏览器中访问 http://w13scan.ca 下载证书并信任它。
+version: '3.8'
+services:
+  w13scan:
+    image: fuzhengwei/w13scan:1.0
+    container_name: w13scan
+    ports:
+      - "7779:7778"
+    volumes:
+      - ./output:/w13scan/W13SCAN/output
+    entrypoint: ["python3", "w13scan.py", "-s", "127.0.0.1:7778", "--html"]
+    tty: true
+```
+
 ## 声明
 
 使用W13Scan前请遵守当地法律,W13Scan仅提供给教育行为使用。
