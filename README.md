@@ -25,7 +25,7 @@ services:
     image: fuzhengwei/w13scan:1.0
     container_name: w13scan
     ports:
-      - "7779:7778"
+      - "7778:7778"
     volumes:
       - ./output:/w13scan/W13SCAN/output
     entrypoint: ["python3", "w13scan.py", "-s", "127.0.0.1:7778", "--html"]
